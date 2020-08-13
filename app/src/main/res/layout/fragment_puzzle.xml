@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.puzzleherexamenandroid.puzzle.PuzzleViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp">
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/question"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/drawing_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.example.puzzleherexamenandroid.puzzle.DrawingView
+            android:id="@+id/drawing_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/erase"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question"
+            android:background="@drawable/border"/>
+
+        <Button
+            android:id="@+id/erase"
+            style="@style/IconOnlyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+
+
+            app:icon="@drawable/ic_002_eraser"
+            app:iconTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/drawing_view"
+            app:layout_constraintTop_toTopOf="@+id/drawing_view" />
+
+        <Button
+            android:id="@+id/submit"
+            style="@style/IconOnlyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:icon="@drawable/ic_001_tick"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/drawing_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/drawing_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

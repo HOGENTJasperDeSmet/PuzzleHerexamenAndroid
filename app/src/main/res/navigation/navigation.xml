@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.puzzleherexamenandroid.title.TitleFragment"
+        android:label="TitleFragment" >
+        <action
+            android:id="@+id/action_titleFragment_to_puzzleSelectFragment"
+            app:destination="@id/puzzleSelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/puzzleSelectFragment"
+        android:name="com.example.puzzleherexamenandroid.puzzle.select.PuzzleSelectFragment"
+        android:label="fragment_puzzle_select"
+        tools:layout="@layout/fragment_puzzle_select" >
+        <action
+            android:id="@+id/action_puzzleSelectFragment_to_dialogueFragment"
+            app:destination="@id/dialogueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/puzzleFragment"
+        android:name="com.example.puzzleherexamenandroid.puzzle.PuzzleFragment"
+        android:label="fragment_puzzle"
+        tools:layout="@layout/fragment_puzzle" >
+        <action
+            android:id="@+id/action_puzzleFragment_to_solvedFragment"
+            app:destination="@id/solvedFragment"
+            app:popUpTo="@id/puzzleSelectFragment" />
+        <action
+            android:id="@+id/action_puzzleFragment_to_wrongFragment"
+            app:destination="@id/wrongFragment"
+            app:popUpTo="@id/puzzleSelectFragment" />
+        <argument
+            android:name="selectedPuzzle"
+            app:argType="com.example.puzzleherexamenandroid.model.Puzzle">
+
+        </argument>
+    </fragment>
+    <fragment
+        android:id="@+id/dialogueFragment"
+        android:name="com.example.puzzleherexamenandroid.dialogue.DialogueFragment"
+        android:label="fragment_dialogue"
+        tools:layout="@layout/fragment_dialogue" >
+        <action
+            android:id="@+id/action_dialogueFragment_to_puzzleFragment"
+            app:destination="@id/puzzleFragment" />
+        <argument
+            android:name="selectedPuzzle"
+            app:argType="com.example.puzzleherexamenandroid.model.Puzzle">
+
+        </argument>
+    </fragment>
+    <fragment
+        android:id="@+id/wrongFragment"
+        android:name="com.example.puzzleherexamenandroid.puzzle.lost.WrongFragment"
+        android:label="fragment_wrong"
+        tools:layout="@layout/fragment_wrong" >
+        <action
+            android:id="@+id/action_wrongFragment_to_puzzleFragment"
+            app:destination="@id/puzzleFragment" />
+        <argument
+            android:name="selectedPuzzle"
+            app:argType="com.example.puzzleherexamenandroid.model.Puzzle"/>
+    </fragment>
+    <fragment
+        android:id="@+id/solvedFragment"
+        android:name="com.example.puzzleherexamenandroid.puzzle.won.SolvedFragment"
+        android:label="fragment_solved"
+        tools:layout="@layout/fragment_solved" >
+        <action
+            android:id="@+id/action_solvedFragment_to_puzzleSelectFragment"
+            app:destination="@id/puzzleSelectFragment" />
+        <argument
+            android:name="selectedPuzzle"
+            app:argType="com.example.puzzleherexamenandroid.model.Puzzle"/>
+    </fragment>
+</navigation>
