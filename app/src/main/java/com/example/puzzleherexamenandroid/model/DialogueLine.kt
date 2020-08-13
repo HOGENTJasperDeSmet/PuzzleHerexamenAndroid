@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Dialogue (
-    val dialogueId: Int,
-    val char1avatar: String,
-    val char2Avatar: String,
-    val dialogueLines: List<DialogueLine>
-): Parcelable
+data class DialogueLine (
+    val dialogueLineId: Int,
+    val text: String,
+    val speaking: Int
+    ): Parcelable
