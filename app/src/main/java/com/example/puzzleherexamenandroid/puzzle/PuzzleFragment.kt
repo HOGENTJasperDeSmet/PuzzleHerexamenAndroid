@@ -1,22 +1,16 @@
 package com.example.puzzleherexamenandroid.puzzle
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.puzzleherexamenandroid.R
 import com.example.puzzleherexamenandroid.databinding.FragmentPuzzleBinding
 import com.example.puzzleherexamenandroid.dialogue.DialogueFragmentArgs
-import com.example.puzzleherexamenandroid.dialogue.DialogueFragmentDirections
-import com.example.puzzleherexamenandroid.dialogue.DialogueViewModel
-import com.example.puzzleherexamenandroid.dialogue.DialogueViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -25,11 +19,6 @@ class PuzzleFragment : Fragment() {
 
     private lateinit var binding : FragmentPuzzleBinding
     private lateinit var viewModel : PuzzleViewModel
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +45,17 @@ class PuzzleFragment : Fragment() {
             binding.drawingView.clear()
             viewModel.resetInput()
         }
+        binding.showImage.setOnClickListener {
+            if(binding.puzzle.visibility == View.GONE){
+                binding.question.visibility = View.GONE
+                binding.puzzle.visibility = View.VISIBLE
+            } else {
+                binding.question.visibility = View.VISIBLE
+                binding.puzzle.visibility = View.GONE
+            }
 
+
+        }
 
         binding.submit.setOnClickListener {
             if(viewModel.correctAnswer()){
@@ -71,13 +70,6 @@ class PuzzleFragment : Fragment() {
                     ))
             }
         }
-
-
-        //animate the question
-        binding.question.setDelay(60)
-        binding.question.setWithMusic(false)
-        binding.question.animateText(viewModel.selectedPuzzle.value?.prompt)
-
         return binding.root
     }
 

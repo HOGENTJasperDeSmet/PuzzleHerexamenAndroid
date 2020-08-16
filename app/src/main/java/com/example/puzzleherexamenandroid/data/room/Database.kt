@@ -1,33 +1,26 @@
 package com.example.puzzleherexamenandroid.data.room
 
-import android.app.Dialog
 import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
-import com.example.puzzleherexamenandroid.data.room.databaseModels.DialogueDatabase
-import com.example.puzzleherexamenandroid.data.room.databaseModels.DialogueLineDatabase
-import com.example.puzzleherexamenandroid.data.room.databaseModels.PuzzleDatabase
-import com.example.puzzleherexamenandroid.model.Dialogue
-import com.example.puzzleherexamenandroid.model.DialogueLine
 import com.example.puzzleherexamenandroid.model.Puzzle
 
-@Database(entities = [PuzzleDatabase::class, DialogueDatabase::class, DialogueLineDatabase::class], version =3,  exportSchema = false)
-abstract class puzzleDatabase : RoomDatabase(){
+@Database(entities = [Puzzle::class], version =9,  exportSchema = false)
+abstract class PuzzleDatabase : RoomDatabase(){
     abstract val puzzleDatabaseDao: PuzzleDatabaseDao
 
     companion object{
         @Volatile
-        private var INSTANCE: puzzleDatabase? = null
+        private var INSTANCE: PuzzleDatabase? = null
 
-        fun getInstance(context: Context): puzzleDatabase {
+        fun getInstance(context: Context): PuzzleDatabase {
             synchronized(this){
                 var instance = INSTANCE
                 if(instance == null){
-                    instance = Room.databaseBuilder(
+                    instance = databaseBuilder(
                         context.applicationContext,
-                        puzzleDatabase::class.java,
+                        PuzzleDatabase::class.java,
                         "puzzleDatabase"
                     ).fallbackToDestructiveMigration().build()
                     INSTANCE = instance

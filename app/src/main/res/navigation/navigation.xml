@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
     app:startDestination="@id/titleFragment">
 
     <fragment
@@ -66,6 +65,10 @@
         <argument
             android:name="selectedPuzzle"
             app:argType="com.example.puzzleherexamenandroid.model.Puzzle"/>
+        <action
+            android:id="@+id/action_wrongFragment_to_puzzleSelectFragment"
+            app:destination="@id/puzzleSelectFragment"
+            app:popUpTo="@id/puzzleSelectFragment" />
     </fragment>
     <fragment
         android:id="@+id/solvedFragment"
@@ -74,7 +77,8 @@
         tools:layout="@layout/fragment_solved" >
         <action
             android:id="@+id/action_solvedFragment_to_puzzleSelectFragment"
-            app:destination="@id/puzzleSelectFragment" />
+            app:destination="@id/puzzleSelectFragment"
+            app:popUpTo="@id/puzzleSelectFragment" />
         <argument
             android:name="selectedPuzzle"
             app:argType="com.example.puzzleherexamenandroid.model.Puzzle"/>

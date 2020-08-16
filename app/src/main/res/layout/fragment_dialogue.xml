@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
             type="com.example.puzzleherexamenandroid.dialogue.DialogueViewModel"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="24dp">
 
 
-        <TextView
-            android:id="@+id/textView2"
+        <ImageView
+            android:id="@+id/char1Avatar"
+            style="@style/CharacterView"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/char2Avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{viewModel.selectedPuzzle.char1Avatar}"
+            android:contentDescription="@string/character_1_avatar" />
+
+        <ImageView
+            android:id="@+id/char2Avatar"
+            android:layout_marginStart="16dp"
+            style="@style/CharacterView"
+            app:imageUrl="@{viewModel.selectedPuzzle.char2Avatar}"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/char1Avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/character_2_avatar" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.selectedPuzzle.title}"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/dialogueText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="18sp"
+            app:animateText="@{viewModel.selectedPuzzle.dialogue}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

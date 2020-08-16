@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.digitalink.Ink
 import com.google.mlkit.vision.digitalink.Ink.Stroke
-import java.util.ArrayList
+import java.util.*
 
 /** Manages the recognition logic and the content that has been added to the current page.  */
 class StrokeManager {
@@ -58,13 +58,6 @@ class StrokeManager {
             statusChangedListener?.onStatusChanged()
         }
 
-    fun setTriggerRecognitionAfterInput(shouldTrigger: Boolean) {
-        triggerRecognitionAfterInput = shouldTrigger
-    }
-
-    fun setClearCurrentInkAfterRecognition(shouldClear: Boolean) {
-        clearCurrentInkAfterRecognition = shouldClear
-    }
     fun getResult(): RecognitionTask.RecognizedInk?{
         return recognitionTask?.result()
     }
@@ -156,40 +149,13 @@ class StrokeManager {
         return true
     }
 
-    // Listeners to update the drawing and status.
-    fun setContentChangedListener(contentChangedListener: ContentChangedListener?) {
-        this.contentChangedListener = contentChangedListener
-    }
-
-    fun setStatusChangedListener(statusChangedListener: StatusChangedListener?) {
-        this.statusChangedListener = statusChangedListener
-    }
-
-    fun setDownloadedModelsChangedListener(
-        downloadedModelsChangedListener: DownloadedModelsChangedListener?
-    ) {
-        this.downloadedModelsChangedListener = downloadedModelsChangedListener
-    }
-
     fun getContent(): List<RecognitionTask.RecognizedInk> {
         return content
     }
 
     // Model downloading / deleting / setting.
-    fun setActiveModel(languageTag: String) {
-        status = modelManager.setModel(languageTag)
-    }
-
-    fun deleteActiveModel(): Task<Nothing?> {
-        return modelManager
-            .deleteActiveModel()
-            .addOnSuccessListener { refreshDownloadedModelsStatus() }
-            .onSuccessTask(
-                SuccessContinuation { status: String? ->
-                    this.status = status
-                    return@SuccessContinuation Tasks.forResult(null)
-                }
-            )
+    fun setActiveModel() {
+        status = modelManager.setModel()
     }
 
     fun download(): Task<Nothing?> {
@@ -206,7 +172,7 @@ class StrokeManager {
     }
 
     // Recognition-related.
-    fun recognize(): Task<String?> {
+    private fun recognize(): Task<String?> {
         if (!stateChangedSinceLastRequest || inkBuilder.isEmpty) {
             status = "No recognition, ink unchanged or empty"
             return Tasks.forResult(null)
@@ -238,7 +204,7 @@ class StrokeManager {
             }
     }
 
-    fun refreshDownloadedModelsStatus() {
+    private fun refreshDownloadedModelsStatus() {
         modelManager
             .downloadedModelLanguages
             .addOnSuccessListener { downloadedLanguageTags: Set<String> ->
@@ -247,9 +213,8 @@ class StrokeManager {
     }
 
     companion object {
-        @JvmField
         @VisibleForTesting
-        val CONVERSION_TIMEOUT_MS: Long = 100000
+        const val CONVERSION_TIMEOUT_MS: Long = 100000
         private const val TAG = "MLKD.StrokeManager"
 
         // This is a constant that is used as a message identifier to trigger the timeout.

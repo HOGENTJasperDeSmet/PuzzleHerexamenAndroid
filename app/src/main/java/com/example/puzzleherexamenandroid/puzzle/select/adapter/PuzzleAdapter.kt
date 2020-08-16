@@ -18,7 +18,7 @@ class PuzzleAdapter(private val onclickListener: OnClickListener): RecyclerView.
     }
 
     override fun getItemCount(): Int {
-        return data.size;
+        return data.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,7 +32,7 @@ class PuzzleAdapter(private val onclickListener: OnClickListener): RecyclerView.
     class ViewHolder private constructor(val binding: ListItemPuzzleBinding): RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Puzzle, clickListener:OnClickListener ) {
-            binding.puzzle = item;
+            binding.puzzle = item
             binding.clickListener = clickListener
         }
 

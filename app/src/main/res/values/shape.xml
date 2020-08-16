@@ -56,6 +56,14 @@
         <item name="android:minWidth">24dp</item>
         <item name="android:minHeight">24dp</item>
         <item name="android:textColor">@color/lightgrey</item>
-
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+    <style name="CharacterView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:scaleType">fitEnd</item>
     </style>
 </resources>

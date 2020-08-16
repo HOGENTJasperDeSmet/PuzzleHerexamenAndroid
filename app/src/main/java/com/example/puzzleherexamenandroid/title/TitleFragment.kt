@@ -1,11 +1,11 @@
 package com.example.puzzleherexamenandroid.title
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.puzzleherexamenandroid.R
 import com.example.puzzleherexamenandroid.databinding.FragmentTitleBinding
@@ -17,10 +17,6 @@ import com.example.puzzleherexamenandroid.databinding.FragmentTitleBinding
 class TitleFragment : Fragment() {
 
     private lateinit var binding : FragmentTitleBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +31,8 @@ class TitleFragment : Fragment() {
         binding.continueGame.setOnClickListener { view: View ->
             Navigation.findNavController(view).navigate(R.id.action_titleFragment_to_puzzleSelectFragment)
         }
-
-
+        binding.dropAnimationView.setDrawables(R.drawable.horse_dropping,R.drawable.rook_dropping,R.drawable.pawn_dropping,R.drawable.puzzle_dropping,R.drawable.question_dropping)
+        binding.dropAnimationView.startAnimation()
 
         return binding.root
     }

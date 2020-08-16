@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
             type="com.example.puzzleherexamenandroid.puzzle.PuzzleViewModel"/>
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,49 +19,81 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/drawing_view"
+            app:animateText="@{viewModel.selectedPuzzle.prompt}"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.puzzleherexamenandroid.puzzle.DrawingView
-            android:id="@+id/drawing_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/erase"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question"
-            android:background="@drawable/border"/>
-
-        <Button
-            android:id="@+id/erase"
-            style="@style/IconOnlyButton"
+        <ImageView
+            android:id="@+id/puzzle"
+            imageUrl="@{viewModel.selectedPuzzle.puzzleImage}"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-
-
-            app:icon="@drawable/ic_002_eraser"
-            app:iconTint="@null"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/drawing_view"
-            app:layout_constraintTop_toTopOf="@+id/drawing_view" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/puzzle_view" />
+
+        <com.example.puzzleherexamenandroid.puzzle.DrawingView
+            android:id="@+id/drawingView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/draw_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonStack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+        <LinearLayout
+            android:id="@+id/buttonStack"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/drawingView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/drawingView"
+            app:layout_constraintTop_toTopOf="@+id/drawingView">
+
+            <Button
+                android:id="@+id/showImage"
+                style="@style/IconOnlyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="@{viewModel.hasImage() ? View.VISIBLE:View.GONE}"
+                app:icon="@drawable/ic_puzzle"
+                app:iconTint="@null" />
+
+            <Button
+                android:id="@+id/erase"
+                style="@style/IconOnlyButton"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_002_eraser"
+                app:iconTint="@null" />
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/submit"
             style="@style/IconOnlyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
             app:icon="@drawable/ic_001_tick"
             app:iconTint="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/drawing_view"
+            app:layout_constraintBottom_toBottomOf="@+id/drawingView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/drawing_view" />
+            app:layout_constraintStart_toEndOf="@+id/drawingView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

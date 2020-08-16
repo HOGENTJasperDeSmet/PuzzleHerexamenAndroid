@@ -1,5 +1,6 @@
 package com.example.puzzleherexamenandroid.puzzle
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.text.TextPaint
@@ -10,6 +11,8 @@ import android.view.MotionEvent
 import android.view.View
 import com.google.mlkit.vision.digitalink.Ink
 import com.google.mlkit.vision.digitalink.Ink.Stroke
+import kotlin.math.max
+import kotlin.math.min
 
 class DrawingView @JvmOverloads constructor(
     context: Context?,
@@ -18,8 +21,8 @@ class DrawingView @JvmOverloads constructor(
         View(context, attributeSet), StrokeManager.ContentChangedListener {
         private val recognizedStrokePaint: Paint
         private val textPaint: TextPaint
-        private val currentStrokePaint: Paint
-        private val canvasPaint: Paint
+        private val currentStrokePaint: Paint = Paint()
+    private val canvasPaint: Paint
         private val currentStroke: Path
         private lateinit var drawCanvas: Canvas
         private lateinit var canvasBitmap: Bitmap
@@ -40,7 +43,7 @@ class DrawingView @JvmOverloads constructor(
             invalidate()
         }
 
-        fun redrawContent() {
+        private fun redrawContent() {
             clear()
             val currentInk = strokeManager.currentInk
             drawInk(currentInk, currentStrokePaint)
@@ -85,7 +88,7 @@ class DrawingView @JvmOverloads constructor(
 
         private fun drawStroke(s: Stroke, paint: Paint) {
             Log.i(TAG, "drawstroke")
-            var path: Path = Path()
+            val path: Path = Path()
             path.moveTo(s.points[0].x, s.points[0].y)
             for (p in s.points.drop(1)) {
                 path.lineTo(p.x, p.y)
@@ -108,6 +111,7 @@ class DrawingView @JvmOverloads constructor(
             canvas.drawPath(currentStroke, currentStrokePaint)
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         override fun onTouchEvent(event: MotionEvent): Boolean {
             val action = event.actionMasked
             val x = event.x
@@ -146,10 +150,10 @@ class DrawingView @JvmOverloads constructor(
                 var right = Float.MIN_VALUE
                 for (s in ink.strokes) {
                     for (p in s.points) {
-                        top = Math.min(top, p.y)
-                        left = Math.min(left, p.x)
-                        bottom = Math.max(bottom, p.y)
-                        right = Math.max(right, p.x)
+                        top = min(top, p.y)
+                        left = min(left, p.x)
+                        bottom = max(bottom, p.y)
+                        right = max(right, p.x)
                     }
                 }
                 val centerX = (left + right) / 2
@@ -176,7 +180,6 @@ class DrawingView @JvmOverloads constructor(
         }
 
         init {
-            currentStrokePaint = Paint()
             currentStrokePaint.color = Color.BLACK // pink.
             currentStrokePaint.isAntiAlias = true
             // Set stroke width based on display density.

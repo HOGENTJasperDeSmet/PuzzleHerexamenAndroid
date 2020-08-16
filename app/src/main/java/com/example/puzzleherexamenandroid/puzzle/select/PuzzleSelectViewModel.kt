@@ -4,25 +4,19 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import androidx.lifecycle.*
-import com.example.puzzleherexamenandroid.data.network.Network
 import com.example.puzzleherexamenandroid.data.repository.PuzzleRepository
-import com.example.puzzleherexamenandroid.data.room.puzzleDatabase.Companion.getInstance
+import com.example.puzzleherexamenandroid.data.room.PuzzleDatabase.Companion.getInstance
 import com.example.puzzleherexamenandroid.model.Puzzle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class PuzzleSelectViewModel(application: Application) : AndroidViewModel(application) {
 
     private var viewModelJob = Job()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main )
-
-    private val _response = MutableLiveData<String>()
 
     private val database = getInstance(application)
     private val puzzleRepository = PuzzleRepository(database,application.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)

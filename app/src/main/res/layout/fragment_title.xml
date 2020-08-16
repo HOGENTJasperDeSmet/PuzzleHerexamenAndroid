@@ -8,22 +8,38 @@
         android:layout_height="match_parent"
         tools:context=".title.TitleFragment">
 
+        <com.waynell.library.DropAnimationView
+            android:id="@+id/dropAnimationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:largePercent="50%"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxSize="80dp"
+            app:minSize="30dp"
+            app:rate="120"
+            app:rotationAnimate="true"
+            app:xAnimate="true"
+            app:yAnimate="true" />
         <TextView
             android:id="@+id/title"
+            style="@style/TextAppearance.MyTheme.Headline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title Screen"
+            android:text="@string/dogged_puzzles"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/continueGame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <Button
             android:id="@+id/continueGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Play"
+            android:layout_marginTop="24dp"
+            android:text="@string/play"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -32,4 +48,5 @@
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

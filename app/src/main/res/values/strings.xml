@@ -1,5 +1,18 @@
 <resources>
-    <string name="app_name">PuzzleHerexamenAndroid</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Dogged Puzzles</string>
+    <string name="puzzle_select">Puzzle Select</string>
+    <string name="select_a_puzzle_to_solve">select a puzzle to solve</string>
+    <string name="dogged_puzzles">Dogged Puzzles</string>
+    <string name="play">Play!</string>
+    <string name="wrong">Wrong</string>
+    <string name="try_again">Try again</string>
+    <string name="try_another">Try another</string>
+    <string name="continue_solving">Continue solving</string>
+    <string name="solved">Solved</string>
+    <string name="character_1_avatar">character 1 avatar</string>
+    <string name="character_2_avatar">character 2 avatar</string>
+    <string name="dog_happy">dog happy</string>
+    <string name="dog_sad">dog sad</string>
+    <string name="puzzle_icon">puzzle icon</string>
+    <string name="puzzle_view">puzzle view</string>
 </resources>
