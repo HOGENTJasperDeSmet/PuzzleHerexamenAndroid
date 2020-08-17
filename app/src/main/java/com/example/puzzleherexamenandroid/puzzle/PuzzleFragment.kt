@@ -45,6 +45,7 @@ class PuzzleFragment : Fragment() {
             binding.drawingView.clear()
             viewModel.resetInput()
         }
+
         binding.showImage.setOnClickListener {
             if(binding.puzzle.visibility == View.GONE){
                 binding.question.visibility = View.GONE

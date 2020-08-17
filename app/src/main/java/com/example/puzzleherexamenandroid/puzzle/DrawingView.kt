@@ -180,7 +180,7 @@ class DrawingView @JvmOverloads constructor(
         }
 
         init {
-            currentStrokePaint.color = Color.BLACK // pink.
+            currentStrokePaint.color = Color.BLACK
             currentStrokePaint.isAntiAlias = true
             // Set stroke width based on display density.
             currentStrokePaint.strokeWidth = TypedValue.applyDimension(

@@ -8,7 +8,7 @@ import com.google.mlkit.common.model.RemoteModelManager
 import com.google.mlkit.vision.digitalink.*
 import java.util.*
 
-/** Class to manage model downloading, deletion, and selection.  */
+/** Class to manage model downloading and selection.  */
 class ModelManager {
     private var model: DigitalInkRecognitionModel? = null
     var recognizer: DigitalInkRecognizer? = null
@@ -44,36 +44,6 @@ class ModelManager {
 
     fun checkIsModelDownloaded(): Task<Boolean?> {
         return remoteModelManager.isModelDownloaded(model!!)
-    }
-
-    fun deleteActiveModel(): Task<String?> {
-        if (model == null) {
-            Log.i(TAG, "Model not set")
-            return Tasks.forResult("Model not set")
-        }
-        return checkIsModelDownloaded()
-            .onSuccessTask { result: Boolean? ->
-                if (!result!!) {
-                    return@onSuccessTask Tasks.forResult("Model not downloaded yet")
-                }
-                remoteModelManager
-                    .deleteDownloadedModel(model!!)
-                    .onSuccessTask {
-                        Log.i(
-                            TAG,
-                            "Model successfully deleted"
-                        )
-                        Tasks.forResult(
-                            "Model successfully deleted"
-                        )
-                    }
-            }
-            .addOnFailureListener { e: Exception ->
-                Log.e(
-                    TAG,
-                    "Error while model deletion: $e"
-                )
-            }
     }
 
     val downloadedModelLanguages: Task<Set<String>>

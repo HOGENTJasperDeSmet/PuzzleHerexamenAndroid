@@ -73,7 +73,7 @@
                 android:id="@+id/erase"
                 style="@style/IconOnlyButton"
                 android:layout_height="wrap_content"
-                app:icon="@drawable/ic_002_eraser"
+                app:icon="@drawable/ic_eraser"
                 app:iconTint="@null" />
         </LinearLayout>
 
@@ -81,7 +81,7 @@
         <Button
             android:id="@+id/submit"
             style="@style/IconOnlyButton"
-            app:icon="@drawable/ic_001_tick"
+            app:icon="@drawable/ic_tick"
             app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="@+id/drawingView"
             app:layout_constraintEnd_toEndOf="parent"

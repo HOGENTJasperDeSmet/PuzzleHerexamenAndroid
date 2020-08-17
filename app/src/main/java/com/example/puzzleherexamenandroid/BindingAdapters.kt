@@ -22,6 +22,9 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         Glide.with(imgView.context).load("https://puzzleapiandroid20200809163632.azurewebsites.net/$imgUrl").fitCenter().into(imgView)
     }
 }
+/**
+ * Sets text in the [typeWriter] for animation
+ */
 @BindingAdapter("animateText")
 fun animateText(typeWriter: TypeWriterView, text: String?) {
     text?.let {
@@ -30,14 +33,21 @@ fun animateText(typeWriter: TypeWriterView, text: String?) {
         typeWriter.setDelay(50)
     }
 }
+/**
+ * Formats the number of the [textView] for puzzle number
+ */
 @BindingAdapter("formatId")
-fun animateText(textView: TextView, id: Int?) {
+fun formatId(textView: TextView, id: Int?) {
     id?.let {
         textView.text = String.format("%03d", id)
     }
 }
+
+/**
+ * Decides animation based on result for [imgView]
+ */
 @BindingAdapter("solveAnimation")
-fun wrongAnimation(imgView: ImageView,solved: Boolean) {
+fun resultAnimation(imgView: ImageView,solved: Boolean) {
     val begin : Int
     val end : Int
     if(solved){

@@ -11,7 +11,6 @@ private const val BASE_URL = "https://puzzleapiandroid20200809163632.azurewebsit
 
 
 
-//private const val BASE_URL = "https://10.0.2.2:5001/"
 private val moshi = Moshi.Builder().
 add(KotlinJsonAdapterFactory())
     .build()
@@ -24,7 +23,6 @@ interface PuzzleApiService{
 
 object Network {
 
-    // Configure retrofit to parse JSON and use coroutines
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
